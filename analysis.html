@@ -37,16 +37,27 @@ ul.task-list li input[type="checkbox"] {
 <link href="analysis_files/libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="analysis_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="analysis_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="analysis_files/libs/bootstrap/bootstrap-47a6f90f654540fc165cc8e168d9da10.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="analysis_files/libs/bootstrap/bootstrap-9c3e45145c45a6fae6bdb3b4b76da85f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="quarto-light">
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
-<main class="content" id="quarto-document-content">
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-full toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#familiarity-and-hottness" id="toc-familiarity-and-hottness" class="nav-link active" data-scroll-target="#familiarity-and-hottness">Familiarity and Hottness</a></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content column-page-right" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -55,7 +66,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-right">
 
     <div>
     <div class="quarto-title-meta-heading">Author</div>
@@ -73,32 +84,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 317 × 7
-   artist         track                   date.entered   wk1   wk2   wk3   wk4
-   &lt;chr&gt;          &lt;chr&gt;                   &lt;date&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
- 1 2 Pac          Baby Don't Cry (Keep... 2000-02-26      87    82    72    77
- 2 2Ge+her        The Hardest Part Of ... 2000-09-02      91    87    92    NA
- 3 3 Doors Down   Kryptonite              2000-04-08      81    70    68    67
- 4 3 Doors Down   Loser                   2000-10-21      76    76    72    69
- 5 504 Boyz       Wobble Wobble           2000-04-15      57    34    25    17
- 6 98^0           Give Me Just One Nig... 2000-08-19      51    39    34    26
- 7 A*Teens        Dancing Queen           2000-07-08      97    97    96    95
- 8 Aaliyah        I Don't Wanna           2000-01-29      84    62    51    41
- 9 Aaliyah        Try Again               2000-03-18      59    53    38    28
-10 Adams, Yolanda Open My Heart           2000-08-26      76    76    74    69
-# ℹ 307 more rows</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 3
-  earliest   latest     range   
-  &lt;date&gt;     &lt;date&gt;     &lt;drtn&gt;  
-1 1999-06-05 2000-12-30 574 days</code></pre>
-</div>
-</div>
+<p>The dataset includes artist, track, debut date, and early weekly rank columns, which provides the basis for the chart analyses below.</p>
+<p>This summary gives the full span of entry dates covered in the Billboard dataset.</p>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Removed 37 rows containing non-finite outside the scale range
@@ -112,43 +99,11 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<p>This highlights how many songs remain on the chart at key milestone weeks.</p>
+<p>This tells us how often songs leave and then return to the chart.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 3
-  week  present missing
-  &lt;fct&gt;   &lt;int&gt;   &lt;int&gt;
-1 wk1       317       0
-2 wk4       300      17
-3 wk10      244      73
-4 wk20      146     171
-5 wk40        7     310
-6 wk76        0     317</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 2
-  re_entered     n
-  &lt;lgl&gt;      &lt;int&gt;
-1 FALSE        302
-2 TRUE          15</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 2
-  status             n
-  &lt;chr&gt;          &lt;int&gt;
-1 improved         251
-2 missing by wk6    37
-3 same               2
-4 worse             27</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 1
-  median_change
-          &lt;dbl&gt;
-1           -27</code></pre>
+<pre><code>Most songs change position moderately between week 1 and week 6, with the median rank shift equal to -27 places.</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -162,38 +117,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 317 × 6
-   artist         track          first_rank best_rank best_rank_week total_weeks
-   &lt;chr&gt;          &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;          &lt;int&gt;       &lt;int&gt;
- 1 2 Pac          Baby Don't Cr…         87        72              3           7
- 2 2Ge+her        The Hardest P…         91        87              2           3
- 3 3 Doors Down   Kryptonite             81         3             32          53
- 4 3 Doors Down   Loser                  76        55              7          20
- 5 504 Boyz       Wobble Wobble          57        17              4          18
- 6 98^0           Give Me Just …         51         2              7          20
- 7 A*Teens        Dancing Queen          97        95              4           5
- 8 Aaliyah        I Don't Wanna          84        35              6          20
- 9 Aaliyah        Try Again              59         1             14          32
-10 Adams, Yolanda Open My Heart          76        57              9          20
-# ℹ 307 more rows</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 4
-  artist  track best_rank_week total_weeks
-  &lt;chr&gt;   &lt;chr&gt;          &lt;int&gt;       &lt;int&gt;
-1 Madonna Music              6          24</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 4
-  artist   track  best_rank_week total_weeks
-  &lt;chr&gt;    &lt;chr&gt;           &lt;int&gt;       &lt;int&gt;
-1 Lonestar Amazed             40          55</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 5
-  artist track  best_rank best_rank_week total_weeks
-  &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt;          &lt;int&gt;       &lt;int&gt;
-1 Creed  Higher         7             46          57</code></pre>
+<pre><code>The summary identifies songs with the fastest and slowest ascents to #1, as well as the top-10 track with the longest chart run.</code></pre>
 </div>
 </div>
 <div class="cell">
@@ -205,6 +129,39 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="familiarity-and-hottness" class="level2">
+<h2 class="anchored" data-anchor-id="familiarity-and-hottness">Familiarity and Hottness</h2>
+<p>artist.familiarity shows how familiar an artist is to their listeners, and artist.hotttness shows how popular an artist is.</p>
+<p>This summary shows which columns contain placeholder values, so downstream analysis considers missing or default data.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Of the 4452 unique artists, 1616 have usable coordinates and 2836 have placeholder 0,0 coordinates.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Note: <code>data/music.csv</code> contains 10,000 total song records but only 3,888 unique artists; of those, 1,403 have usable coordinates while 2,485 have placeholder coordinates with both latitude and longitude equal to 0, which limits the completeness of any map-based visualization.</p>
+</section>
 
 </main>
 <!-- /main column -->

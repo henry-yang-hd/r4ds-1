@@ -1,43 +1,31 @@
----
-title: "Analyzing Music Data"
-author: "Henry Yang"
-format:
-  html:
-    theme: flatly
-    toc: true
-    toc-depth: 2
-    toc-location: left
-    page-layout: full
-    code-copy: true
-    css: styles.css
-execute:
-  echo: false
----
-
-
-```{r}
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
 #| message: false
 library(tidyverse)
 library(maps)
-```
-
-The dataset includes artist, track, debut date, and early weekly rank columns, which provides the basis for the chart analyses below.
-
-```{r}
-billboard_overview <- billboard |> select(artist, track, date.entered, wk1:wk4)
-```
-
-```{r}
-billboard_daterange <- billboard |> summarize(
+#
+#
+#
+billboard |> select(artist, track, date.entered, wk1:wk4)
+#
+#
+#
+billboard |> summarize(
   earliest = min(date.entered),
   latest   = max(date.entered),
   range    = latest - earliest
 )
-```
-
-This summary gives the full span of entry dates covered in the Billboard dataset.
-
-```{r}
+#
+#
+#
 n <- sum(!is.na(billboard$wk6))
 
 billboard |>
@@ -49,10 +37,10 @@ billboard |>
     x = "Week 6 Rank",
     y = "Count"
   )
-```
-
-```{r}
-weekly_presence <- billboard |>
+#
+#
+#
+billboard |>
   select(wk1, wk4, wk10, wk20, wk40, wk76) |>
   pivot_longer(
     everything(),
@@ -65,12 +53,10 @@ weekly_presence <- billboard |>
     present = sum(!is.na(rank)),
     missing = sum(is.na(rank))
   )
-```
-
-This highlights how many songs remain on the chart at key milestone weeks.
-
-```{r}
-reentry_counts <- billboard |>
+#
+#
+#
+billboard |>
   pivot_longer(
     starts_with("wk"),
     names_to      = "week",
@@ -85,10 +71,9 @@ reentry_counts <- billboard |>
     .groups = "drop"
   ) |>
   count(re_entered)
-```
-This tells us how often songs leave and then return to the chart.
-
-```{r}
+#
+#
+#
 wk1_wk6 <- billboard |>
   select(artist, track, wk1, wk6) |>
   mutate(
@@ -101,16 +86,14 @@ wk1_wk6 <- billboard |>
     )
   )
 
-status_counts <- wk1_wk6 |> count(status)
-median_change <- wk1_wk6 |>
+wk1_wk6 |> count(status)
+
+wk1_wk6 |>
   filter(!is.na(change)) |>
-  summarize(median_change = median(change)) |>
-  pull(median_change)
-
-cat("Most songs change position moderately between week 1 and week 6, with the median rank shift equal to", median_change, "places.")
-```
-
-```{r}
+  summarize(median_change = median(change))
+#
+#
+#
 #| cache: true
 billboard |>
   pivot_longer(
@@ -130,9 +113,9 @@ billboard |>
     x = "Week on chart",
     y = "Rank (1 = best)"
   )
-```
-
-```{r}
+#
+#
+#
 song_summary <- billboard |>
   pivot_longer(
     starts_with("wk"),
@@ -151,20 +134,28 @@ song_summary <- billboard |>
     .groups = "drop"
   )
 
-fastest_song <- song_summary |>
+song_summary
+
+# Fastest song to reach #1
+song_summary |>
   filter(best_rank == 1) |>
-  slice_min(best_rank_week, n = 1)
-slowest_song <- song_summary |>
+  slice_min(best_rank_week, n = 1) |>
+  select(artist, track, best_rank_week, total_weeks)
+
+# Slowest song to reach #1
+song_summary |>
   filter(best_rank == 1) |>
-  slice_max(best_rank_week, n = 1)
-longest_top10_song <- song_summary |>
+  slice_max(best_rank_week, n = 1) |>
+  select(artist, track, best_rank_week, total_weeks)
+
+# Top-10 song with the longest chart run
+song_summary |>
   filter(best_rank <= 10) |>
-  slice_max(total_weeks, n = 1)
-
-cat("The summary identifies songs with the fastest and slowest ascents to #1, as well as the top-10 track with the longest chart run.")
-```
-
-```{r}
+  slice_max(total_weeks, n = 1) |>
+  select(artist, track, best_rank, best_rank_week, total_weeks)
+#
+#
+#
 #| cache: true
 # Identify the three notable songs with labels
 notable <- bind_rows(
@@ -209,9 +200,9 @@ ggplot() +
     y        = "Rank (1 = best)"
   ) +
   theme(legend.position = "bottom")
-```
-
-```{r}
+#
+#
+#
 #| message: false
 music <- read_csv("data/music.csv")
 
@@ -227,13 +218,13 @@ music_year |>
     x        = "Year",
     y        = "Count"
   )
-```
-
-## Familiarity and Hottness
-artist.familiarity shows how familiar an artist is to their listeners, and artist.hotttness shows how popular an artist is.
-
-```{r}
-placeholder_summary <- music |>
+#
+#
+#
+#
+#
+#
+music |>
   summarize(
     artist.location    = sum(artist.location == "0"),
     release.name       = sum(release.name == "0"),
@@ -243,10 +234,9 @@ placeholder_summary <- music |>
     artist.hotttnesss  = sum(artist.hotttnesss == 0)
   ) |>
   pivot_longer(everything(), names_to = "column", values_to = "placeholder_count")
-```
-This summary shows which columns contain placeholder values, so downstream analysis considers missing or default data.
-
-```{r}
+#
+#
+#
 coord_counts <- music |>
   distinct(artist.id, artist.name, artist.latitude, artist.longitude) |>
   mutate(placeholder = artist.latitude == 0 & artist.longitude == 0) |>
@@ -255,18 +245,15 @@ coord_counts <- music |>
     usable = sum(!placeholder),
     placeholder = sum(placeholder)
   )
- cat(
-   "Of the", coord_counts$total_unique_artists, "unique artists,",
-   coord_counts$usable, "have usable coordinates and",
-   coord_counts$placeholder, "have placeholder 0,0 coordinates.\n"
- )
-```
 
-```{r}
+coord_counts
+#
+#
+#
 artist_locations <- music |>
-  distinct(artist.id, artist.name, artist.latitude, artist.longitude, song.year) |>
+  distinct(artist.id, artist.name, artist.latitude, artist.longitude, artist.hotttnesss) |>
   filter(!(artist.latitude == 0 & artist.longitude == 0)) |>
-  filter(song.year > 0)
+  filter(artist.hotttnesss > 0)
 
 world_map <- map_data("world")
 
@@ -280,19 +267,22 @@ ggplot() +
   ) +
   geom_point(
     data = artist_locations,
-    aes(x = artist.longitude, y = artist.latitude, color = song.year),
-    alpha = 0.8,
+    aes(x = artist.longitude, y = artist.latitude, color = artist.hotttnesss),
+    alpha = 0.7,
     size = 1.5
   ) +
-  scale_color_viridis_c(name = "Song year", option = "viridis") +
+  scale_color_viridis_c(name = "Artist hotttness") +
   coord_quickmap() +
   labs(
-    title = "Global Artist Locations by Song Release Year",
-    subtitle = "Point color reflects the release year of the artist’s song for artists with usable coordinates.",
+    title = "Global Locations of Artists with Positive Hotttness",
+    subtitle = "Point color encodes artist hotttness for artists with usable non-zero coordinates.",
     x = "Longitude",
     y = "Latitude"
   ) +
   theme_minimal()
-```
-
-Note: `data/music.csv` contains 10,000 total song records but only 3,888 unique artists; of those, 1,403 have usable coordinates while 2,485 have placeholder coordinates with both latitude and longitude equal to 0, which limits the completeness of any map-based visualization.
+#
+#
+#
+#
+#
+#
