@@ -1,0 +1,49 @@
+body {
+  background-color: #f7f9fc;
+  color: #1f2a44;
+}
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+h1, h2, h3, h4 {
+  color: #0d3b66;
+}
+
+blockquote {
+  border-left: 4px solid #0d3b66;
+  background: #e9f1fb;
+  padding: 1rem 1.25rem;
+  color: #1f2a44;
+}
+
+pre, code, tt {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+figure {
+  margin-bottom: 1.75rem;
+}
+
+figure .caption {
+  font-size: 0.95rem;
+  color: #4f5d73;
+}
+
+table th {
+  background: #0d3b66;
+  color: #fff;
+}
+
+table td, table th {
+  border: 1px solid #d9dfe9;
+  padding: 0.65rem;
+}
+
+@media (max-width: 900px) {
+  main {
+    padding: 0 1rem;
+  }
+}
