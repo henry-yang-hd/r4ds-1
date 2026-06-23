@@ -73,7 +73,138 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 317 × 7
+   artist         track                   date.entered   wk1   wk2   wk3   wk4
+   &lt;chr&gt;          &lt;chr&gt;                   &lt;date&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 2 Pac          Baby Don't Cry (Keep... 2000-02-26      87    82    72    77
+ 2 2Ge+her        The Hardest Part Of ... 2000-09-02      91    87    92    NA
+ 3 3 Doors Down   Kryptonite              2000-04-08      81    70    68    67
+ 4 3 Doors Down   Loser                   2000-10-21      76    76    72    69
+ 5 504 Boyz       Wobble Wobble           2000-04-15      57    34    25    17
+ 6 98^0           Give Me Just One Nig... 2000-08-19      51    39    34    26
+ 7 A*Teens        Dancing Queen           2000-07-08      97    97    96    95
+ 8 Aaliyah        I Don't Wanna           2000-01-29      84    62    51    41
+ 9 Aaliyah        Try Again               2000-03-18      59    53    38    28
+10 Adams, Yolanda Open My Heart           2000-08-26      76    76    74    69
+# ℹ 307 more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  earliest   latest     range   
+  &lt;date&gt;     &lt;date&gt;     &lt;drtn&gt;  
+1 1999-06-05 2000-12-30 574 days</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 37 rows containing non-finite outside the scale range
+(`stat_bin()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  week  present missing
+  &lt;fct&gt;   &lt;int&gt;   &lt;int&gt;
+1 wk1       317       0
+2 wk4       300      17
+3 wk10      244      73
+4 wk20      146     171
+5 wk40        7     310
+6 wk76        0     317</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  re_entered     n
+  &lt;lgl&gt;      &lt;int&gt;
+1 FALSE        302
+2 TRUE          15</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 2
+  status             n
+  &lt;chr&gt;          &lt;int&gt;
+1 improved         251
+2 missing by wk6    37
+3 same               2
+4 worse             27</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  median_change
+          &lt;dbl&gt;
+1           -27</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 317 × 6
+   artist         track          first_rank best_rank best_rank_week total_weeks
+   &lt;chr&gt;          &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;          &lt;int&gt;       &lt;int&gt;
+ 1 2 Pac          Baby Don't Cr…         87        72              3           7
+ 2 2Ge+her        The Hardest P…         91        87              2           3
+ 3 3 Doors Down   Kryptonite             81         3             32          53
+ 4 3 Doors Down   Loser                  76        55              7          20
+ 5 504 Boyz       Wobble Wobble          57        17              4          18
+ 6 98^0           Give Me Just …         51         2              7          20
+ 7 A*Teens        Dancing Queen          97        95              4           5
+ 8 Aaliyah        I Don't Wanna          84        35              6          20
+ 9 Aaliyah        Try Again              59         1             14          32
+10 Adams, Yolanda Open My Heart          76        57              9          20
+# ℹ 307 more rows</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  artist  track best_rank_week total_weeks
+  &lt;chr&gt;   &lt;chr&gt;          &lt;int&gt;       &lt;int&gt;
+1 Madonna Music              6          24</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  artist   track  best_rank_week total_weeks
+  &lt;chr&gt;    &lt;chr&gt;           &lt;int&gt;       &lt;int&gt;
+1 Lonestar Amazed             40          55</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 5
+  artist track  best_rank best_rank_week total_weeks
+  &lt;chr&gt;  &lt;chr&gt;      &lt;dbl&gt;          &lt;int&gt;       &lt;int&gt;
+1 Creed  Higher         7             46          57</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 </main>
 <!-- /main column -->
